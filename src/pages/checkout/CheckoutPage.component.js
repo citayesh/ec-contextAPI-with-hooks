@@ -1,6 +1,4 @@
-import React from "react";
-import {selectCartItems,selectCartTotal} from "../../redux/cart/cart.selectors"
-import { useSelector } from "react-redux";
+import React, { useContext } from "react";
 import CheckoutItem from "../../components/checkout-item/CheckoutItem.component";
 import StripeCheckoutButton from '../../components/stripeButton/stripeButton.component'
 import {
@@ -10,10 +8,12 @@ import {
   TotalContainer,
   WarningContainer
 } from './CheckoutPage.style';
+import { CartContext } from "../../contexts/cart/Cart.context";
 
 const CheckoutPage =()=>{
-    const total =useSelector(state =>selectCartTotal(state));
-    const cartItems=useSelector(state=>selectCartItems(state))
+    const {state,cartTotal}=useContext(CartContext);
+    const{cartItems}=state;
+
     return(
         <CheckoutPageContainer>
         <CheckoutHeaderContainer>
@@ -36,13 +36,13 @@ const CheckoutPage =()=>{
         {cartItems.map(cartItem => (
           <CheckoutItem key={cartItem.id} item={cartItem} />
         ))}
-        <TotalContainer>TOTAL: ${total}</TotalContainer>
+        <TotalContainer>TOTAL: ${cartTotal}</TotalContainer>
         <WarningContainer>
       *Please use the following test credit card for payments*
       <br />
       4242 4242 4242 4242 - Exp: 01/20 - CVV: 123
     </WarningContainer>
-    <StripeCheckoutButton price={total} />
+    <StripeCheckoutButton price={cartTotal} />
       </CheckoutPageContainer>
     );
     

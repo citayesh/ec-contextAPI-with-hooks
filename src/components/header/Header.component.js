@@ -1,8 +1,5 @@
-import React from "react";
+import React, { useContext } from "react";
 import {ReactComponent as Logo} from "../../assets/crown.svg"
-import {useSelector, useDispatch } from 'react-redux';
-import {selectCartHidden} from "../../redux/cart/cart.selectors"
-import {selecetCurrentUser} from "../../redux/user/user.selector"
 import {
   HeaderContainer,
   LogoContainer,
@@ -11,12 +8,14 @@ import {
 } from  "./Header.style"
 import CartIcon from "../cart-icon/CartIcon.component";
 import CartDropdown from "../cart-dropdown/CartDropdown.component";
-import { signOutStart } from "../../redux/user/user.action";
+import { auth } from "../firebase/Firebase.utils";
+import CurrentUserContext from "../../contexts/current-user/CurrentUser.context";
+import { CartContext } from "../../contexts/cart/Cart.context";
 
 function Header(){
-   const currentUser=useSelector(state=>selecetCurrentUser(state))
-   const hidden=useSelector(state=>selectCartHidden(state))
-   const dispatch=useDispatch(); 
+   const currentUser=useContext(CurrentUserContext)
+   const  {state}  = useContext(CartContext);
+   const {hidden}=state;
    return (
    <HeaderContainer>
     <LogoContainer to='/'>
@@ -30,7 +29,7 @@ function Header(){
         CONTACT
       </OptionLink>
       {currentUser ? (
-        <OptionLink OptionLink as='div' onClick={() => dispatch(signOutStart())}>
+        <OptionLink OptionLink as='div' onClick={() => auth.signOut()}>
           SIGN OUT
         </OptionLink>
       ) : (
@@ -40,7 +39,7 @@ function Header(){
       )}
       <CartIcon />
     </OptionsContainer>
-    {hidden ? null : <CartDropdown />}
+    {hidden  ? null : <CartDropdown />}
   </HeaderContainer>
    )
 };

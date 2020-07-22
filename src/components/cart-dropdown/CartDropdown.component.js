@@ -1,19 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
     CartDropdownContainer,
     CartDropdownButton,
     EmptyMessageContainer,
     CartItemsContainer
   } from "./CartDropdown.style";
-import { useSelector, useDispatch } from "react-redux";
-import {selectCartItems} from "../../redux/cart/cart.selectors"
 import CartItem from "../cart-item/CartItem.componenet";
 import { withRouter } from "react-router-dom";
-import {toggleCartHidden} from "../../redux/cart/cart.action"
+import { CartContext} from "../../contexts/cart/Cart.context"
 
 function CartDropdown({history}){
-const cartItems=useSelector(state=>selectCartItems(state));
-const dispatch =useDispatch();
+const {state,dispatch}=useContext(CartContext);
+const {cartItems}=state;
     return(
     <CartDropdownContainer>
             <CartItemsContainer>
@@ -29,7 +27,7 @@ const dispatch =useDispatch();
                 }
             </CartItemsContainer>
             <CartDropdownButton onClick={()=>{history.push('/checkout')
-        dispatch(toggleCartHidden())
+        dispatch({type:"TOGGLE_CART_HIDDEN"})
         }}>GO TO CHECKOUT</CartDropdownButton>   
     </CartDropdownContainer>
     )}

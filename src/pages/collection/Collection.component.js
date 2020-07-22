@@ -1,15 +1,18 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   CollectionPageContainer,
   CollectionTitle,
   CollectionItemsContainer} from './Collection.style'
-import { useSelector } from "react-redux";
-import {selectCollection} from "../../redux/shop/shop.selectors"
+
 import CollectionItem from "../../components/collection-item/CollectionItem.component";
+import CollectionsContext from "../../contexts/collections/Collections.context";
+import Spinner from "../../components/with-spinner/Spinner.component";
 
 const CollectionPage = ({match}) => {
-  const collection=useSelector(selectCollection(match.params.collectionId));
-  const {title,items}=collection;
+  const collections = useContext(CollectionsContext);
+  if(collections) {
+  const collection = collections[match.params.collectionId];
+  const { title, items } = collection;
   return (
       <CollectionPageContainer>
         <CollectionTitle >{title}</CollectionTitle>
@@ -20,6 +23,11 @@ const CollectionPage = ({match}) => {
         </CollectionItemsContainer>
       </CollectionPageContainer>
     );
+        }else{
+          return(
+            <Spinner/>
+          )
+        }
   };
 
   export default CollectionPage;
