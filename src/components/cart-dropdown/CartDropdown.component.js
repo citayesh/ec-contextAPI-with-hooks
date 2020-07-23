@@ -6,12 +6,13 @@ import {
     CartItemsContainer
   } from "./CartDropdown.style";
 import CartItem from "../cart-item/CartItem.componenet";
-import { withRouter } from "react-router-dom";
+import { withRouter, useHistory } from "react-router-dom";
 import { CartContext} from "../../contexts/cart/Cart.context"
 
-function CartDropdown({history}){
+function CartDropdown(){
 const {state,dispatch}=useContext(CartContext);
 const {cartItems}=state;
+const history =useHistory();
     return(
     <CartDropdownContainer>
             <CartItemsContainer>

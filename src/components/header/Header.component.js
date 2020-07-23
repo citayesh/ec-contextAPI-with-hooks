@@ -8,7 +8,7 @@ import {
 } from  "./Header.style"
 import CartIcon from "../cart-icon/CartIcon.component";
 import CartDropdown from "../cart-dropdown/CartDropdown.component";
-import { auth } from "../firebase/Firebase.utils";
+import { auth } from "../../service/firebase/Firebase.utils";
 import CurrentUserContext from "../../contexts/current-user/CurrentUser.context";
 import { CartContext } from "../../contexts/cart/Cart.context";
 

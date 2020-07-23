@@ -2,7 +2,7 @@ import React, { useState} from 'react';
 import CustomButton from '../custom-button/CustomButton.component';
 import FormInput from '../form-input/FormInput.component';
 import {SignUpTitle,SignUpContainer} from './SignUp.style';
-import { auth, createUserProfileDocument } from '../firebase/Firebase.utils';
+import { auth, createUserProfileDocument } from '../../service/firebase/Firebase.utils';
 
 function SignUp(){  
   const [state,setState]=useState({

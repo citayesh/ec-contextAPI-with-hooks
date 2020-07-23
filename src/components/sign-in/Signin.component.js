@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import {SignInContainer,SignInTitle,ButtonsBarContainer} from "./Signin.style"
 import FormInput from '../form-input/FormInput.component';
 import CustomButton from '../custom-button/CustomButton.component';
-import { auth, signInWithGoogle } from '../firebase/Firebase.utils';
+import { auth, signInWithGoogle } from '../../service/firebase/Firebase.utils';
 
 function Signin(){
     const [state, setState] = useState({ email: "", password: "" });

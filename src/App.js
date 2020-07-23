@@ -7,7 +7,7 @@ import Header from './components/header/Header.component';
 import SigninUp from './pages/sign-in-up-page/SigninUp.component';
 import CheckoutPage from './pages/checkout/CheckoutPage.component';
 import CurrentUserContext from './contexts/current-user/CurrentUser.context';
-import { auth, createUserProfileDocument } from './components/firebase/Firebase.utils';
+import { auth, createUserProfileDocument } from './service/firebase/Firebase.utils';
 
 
 function App (){
